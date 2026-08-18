@@ -26,6 +26,16 @@ function WaxSeal({ onClick, breaking }: { onClick: () => void; breaking: boolean
         />
       )}
 
+      {/* Open hint — above the star */}
+      <motion.span
+        className="label-utility text-gold/65 tracking-[0.3em]"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        Open
+      </motion.span>
+
+      {/* Star seal — below "Open" */}
       <svg viewBox="0 0 90 90" className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_24px_rgba(201,162,39,0.65)]" aria-hidden="true">
         <defs>
           <radialGradient id="wax-g" cx="38%" cy="30%" r="65%">
@@ -38,15 +48,6 @@ function WaxSeal({ onClick, breaking }: { onClick: () => void; breaking: boolean
         <circle cx="45" cy="43" r="19" fill="url(#wax-g)" />
         <text x="45" y="50" textAnchor="middle" fontFamily="Georgia,serif" fontSize="19" fontWeight="bold" fill="#150c07" opacity="0.88">N</text>
       </svg>
-
-      {/* Open hint */}
-      <motion.span
-        className="label-utility text-gold/65 tracking-[0.3em]"
-        animate={{ opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        Open
-      </motion.span>
     </motion.button>
   );
 }
@@ -134,14 +135,14 @@ export function EnvelopeReveal() {
         {/* ── Invitation text — just two lines, breathing room ── */}
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pointer-events-none select-none">
           <p
-            className="font-body italic text-parchment/50 tracking-wide"
-            style={{ fontSize: "clamp(0.6rem, 1.6vw, 0.8rem)" }}
+            className="font-body italic text-parchment/80 tracking-wide"
+            style={{ fontSize: "clamp(0.65rem, 1.8vw, 0.85rem)" }}
           >
             The families of Samantha &amp; Michael
           </p>
           <p
             className="font-script text-gold-light"
-            style={{ fontSize: "clamp(1.1rem, 3.5vw, 1.7rem)", lineHeight: 1.3 }}
+            style={{ fontSize: "clamp(1.2rem, 3.8vw, 1.8rem)", lineHeight: 1.3 }}
           >
             cordially invite you
           </p>
