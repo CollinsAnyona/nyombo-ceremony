@@ -5,9 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { Crown } from "@/components/motifs/crown";
 import { FloralCorner } from "@/components/motifs/floral-corner";
-import { DhowSilhouette } from "@/components/motifs/dhow-silhouette";
 import { SparkleField } from "@/components/motifs/sparkle-field";
-import { DiamondBorder } from "@/components/motifs/diamond-border";
 import { ButtonLink } from "@/components/ui/button";
 import { ceremonyContent } from "@/content/ceremony";
 import { siteConfig } from "@/lib/site-config";
@@ -192,7 +190,7 @@ export function Hero() {
 
         {/* 8. CTAs */}
         <motion.div
-          className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row"
+          className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row pb-20 sm:pb-28"
           {...up(revealed, reduced, 0.9)}
         >
           <ButtonLink href="#rsvp">{hero.actions.rsvp}</ButtonLink>
@@ -201,74 +199,10 @@ export function Hero() {
           </ButtonLink>
         </motion.div>
 
-        {/* 9. Lake scene — pushed to the bottom */}
-        <motion.div className="mt-auto w-full" {...appear(revealed, reduced, 1.0)}>
-          <LakeScene reduced={reduced} />
-        </motion.div>
+
 
       </div>
     </section>
   );
 }
 
-function LakeScene({ reduced }: { reduced: boolean | null }) {
-  return (
-    <div className="relative w-full overflow-hidden" style={{ height: "clamp(120px, 18vw, 180px)" }}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1e0f04] via-[#0e1a2a] to-[#060e18]" />
-
-      {/* Sun */}
-      <div className="absolute left-1/2 -translate-x-1/2 rounded-full bg-amber-sunset/35 blur-3xl"
-        style={{ top: "4%", width: "36%", height: "50%" }} />
-      <div className="absolute left-1/2 -translate-x-1/2 rounded-full bg-gold-light/40 blur-lg"
-        style={{ top: "12%", width: "8%", height: "24%" }} />
-      <div className="absolute left-1/2 -translate-x-1/2 rounded-full bg-gold/60"
-        style={{ top: "18%", width: "2.5%", height: "10%", minWidth: "10px" }} />
-
-      {/* Horizon */}
-      <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent" style={{ top: "44%" }} />
-
-      {/* Water */}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-[#0c1d2e]/80 to-[#060e18]" style={{ top: "44%" }} />
-
-      {/* Reflection */}
-      <div className="absolute left-1/2 -translate-x-1/2 bg-gradient-to-b from-gold/10 to-transparent blur-sm"
-        style={{ top: "44%", width: "14%", height: "36%" }} />
-
-      {/* Shimmer */}
-      {[
-        { l: "14%", r: "14%", top: "55%" },
-        { l: "24%", r: "24%", top: "67%" },
-        { l: "9%",  r: "9%",  top: "78%" },
-      ].map((s, i) => (
-        <div key={i} className="absolute h-px bg-gradient-to-r from-transparent via-gold/12 to-transparent"
-          style={{ top: s.top, left: s.l, right: s.r }} />
-      ))}
-
-      {/* Shores */}
-      <svg aria-hidden="true" viewBox="0 0 320 90" className="absolute bottom-0 left-0 w-[44%]" preserveAspectRatio="none">
-        <path d="M0 90 L0 52 C25 46 55 38 85 42 C115 46 145 36 175 40 C205 44 250 48 290 46 L320 44 L320 90 Z" fill="#060e18" />
-        <path d="M0 52 C25 46 55 38 85 42 C115 46 145 36 175 40 C205 44 250 48 290 46 L320 44" stroke="#c9a227" strokeWidth="0.5" strokeOpacity="0.2" fill="none" />
-      </svg>
-      <svg aria-hidden="true" viewBox="0 0 320 90" className="absolute bottom-0 right-0 w-[44%] -scale-x-100" preserveAspectRatio="none">
-        <path d="M0 90 L0 52 C25 46 55 38 85 42 C115 46 145 36 175 40 C205 44 250 48 290 46 L320 44 L320 90 Z" fill="#060e18" />
-        <path d="M0 52 C25 46 55 38 85 42 C115 46 145 36 175 40 C205 44 250 48 290 46 L320 44" stroke="#c9a227" strokeWidth="0.5" strokeOpacity="0.2" fill="none" />
-      </svg>
-
-      {/* Dhow */}
-      <motion.div
-        className="absolute"
-        style={{ top: "22%", left: "9%" }}
-        animate={reduced ? undefined : { y: [0, -4, 0] }}
-        transition={reduced ? undefined : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <DhowSilhouette className="w-12 opacity-80 sm:w-16" />
-      </motion.div>
-
-      {/* Shore labels */}
-      <span className="absolute label-utility text-parchment/25 tracking-widest" style={{ bottom: "10%", left: "2.5%", fontSize: "0.55rem" }}>Homa-Bay</span>
-      <span className="absolute label-utility text-parchment/25 tracking-widest" style={{ bottom: "10%", right: "2.5%", fontSize: "0.55rem" }}>Siaya</span>
-
-      <div className="absolute inset-x-0 bottom-0"><DiamondBorder /></div>
-    </div>
-  );
-}
