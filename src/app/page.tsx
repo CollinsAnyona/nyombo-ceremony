@@ -10,10 +10,12 @@ import { Gifts } from "@/components/sections/gifts";
 import { Faq } from "@/components/sections/faq";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { TheCrossing } from "@/components/ui/the-crossing";
+import { EnvelopeReveal } from "@/components/ui/envelope-reveal";
 
 export default function Home() {
   return (
     <>
+      <EnvelopeReveal />
       <TheCrossing />
       <main className="flex-1 bg-ink text-parchment pb-16">
         <Hero />
