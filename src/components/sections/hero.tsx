@@ -41,8 +41,8 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const photoY     = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
-  const leftX      = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
-  const rightX     = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
+  const upY        = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
+  const downY      = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
   const floralY    = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   return (
@@ -53,7 +53,7 @@ export function Hero() {
       style={{ minHeight: "100svh" }}
       aria-label="Hero — Homa-Bay meets Siaya"
     >
-      {/* ── LAYER 1: Photo ── */}
+      {/* LAYER 1: Photo */}
       <motion.div
         aria-hidden="true"
         className="absolute inset-0"
@@ -69,7 +69,7 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* ── LAYER 2: Ink overlay ── */}
+      {/* LAYER 2: Ink overlay */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_35%,rgba(21,12,7,0.1)_0%,rgba(21,12,7,0.6)_55%,rgba(21,12,7,0.97)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-ink via-ink/90 to-transparent" />
@@ -78,15 +78,15 @@ export function Hero() {
         <div className="absolute inset-y-0 right-0 w-[20%] bg-gradient-to-l from-ink/88 to-transparent" />
       </div>
 
-      {/* ── LAYER 3: Ambient glow ── */}
+      {/* LAYER 3: Ambient glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-[50%] h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(201,162,39,0.07),transparent)]" />
       </div>
 
-      {/* ── LAYER 4: Sparkles ── */}
+      {/* LAYER 4: Sparkles */}
       <SparkleField className="pointer-events-none absolute inset-0 z-10" />
 
-      {/* ── LAYER 5: Floral corners ── */}
+      {/* LAYER 5: Floral corners */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-10"
@@ -96,60 +96,65 @@ export function Hero() {
         <FloralCorner className="absolute -right-3 -top-3 w-28 -scale-x-100 opacity-50 sm:w-36" />
       </motion.div>
 
-      {/* ── LAYER 6: Split title — desktop only, pinned to top 15%–42% of viewport ──
-           This zone sits ABOVE the centre content zone (which starts at ~42%).
-           The two words never overlap the couple names, scripture, or CTAs. ── */}
+      {/* LAYER 6: Stacked title — desktop only (sm+)
+          HOMA-BAY at top · meets in centre · SIAYA at bottom
+          Pinned to top 14%–50% of viewport — entirely above Zone B. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute z-20 hidden sm:flex items-center justify-between w-full px-4 lg:px-8"
-        style={{ top: "18%", bottom: "52%" }}
+        className="pointer-events-none absolute z-20 hidden sm:flex flex-col items-center justify-between w-full px-6"
+        style={{ top: "14%", bottom: "50%" }}
       >
+        {/* HOMA-BAY */}
         <motion.span
-          className="font-display font-semibold uppercase text-gold-engraved select-none"
-          style={{
-            fontSize: "clamp(1.8rem, 7vw, 5.5rem)",
-            letterSpacing: "0.07em",
-            lineHeight: 1,
-            filter: "drop-shadow(2px 3px 0 rgba(21,12,7,0.95))",
-          }}
-          {...fadeIn(reduced, 0.5)}
+          className="font-display font-semibold uppercase text-gold-engraved select-none text-center w-full"
+          {...fadeIn(reduced, 0.4)}
           {...(reduced ? {} : {
             style: {
               fontSize: "clamp(1.8rem, 7vw, 5.5rem)",
-              letterSpacing: "0.07em",
+              letterSpacing: "0.08em",
               lineHeight: 1,
               filter: "drop-shadow(2px 3px 0 rgba(21,12,7,0.95))",
-              x: leftX,
-            }
+              y: upY,
+            },
           })}
         >
           {hero.titleTop}
         </motion.span>
 
+        {/* meets */}
+        <motion.div className="flex items-center gap-4 w-52" {...fadeIn(reduced, 0.55)}>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/45" />
+          <span
+            className="font-script text-parchment/60 shrink-0"
+            style={{ fontSize: "clamp(1.3rem, 3vw, 2rem)" }}
+          >
+            {hero.titleJoiner}
+          </span>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/45" />
+        </motion.div>
+
+        {/* SIAYA */}
         <motion.span
-          className="font-display font-semibold uppercase text-gold-engraved select-none text-right"
-          {...fadeIn(reduced, 0.5)}
+          className="font-display font-semibold uppercase text-gold-engraved select-none text-center w-full"
+          {...fadeIn(reduced, 0.4)}
           {...(reduced ? {} : {
             style: {
               fontSize: "clamp(1.8rem, 7vw, 5.5rem)",
-              letterSpacing: "0.07em",
+              letterSpacing: "0.08em",
               lineHeight: 1,
               filter: "drop-shadow(2px 3px 0 rgba(21,12,7,0.95))",
-              x: rightX,
-            }
+              y: downY,
+            },
           })}
         >
           {hero.titleBottom}
         </motion.span>
       </div>
 
-      {/* ── LAYER 7: Centre content — three explicit zones ── */}
-      <div
-        className="relative z-30 flex flex-col"
-        style={{ minHeight: "100svh" }}
-      >
+      {/* LAYER 7: Centre content — three explicit vertical zones */}
+      <div className="relative z-30 flex flex-col" style={{ minHeight: "100svh" }}>
 
-        {/* ZONE A: Crown + badge — top of page */}
+        {/* ZONE A: Crown + badge — top */}
         <div className="flex flex-col items-center pt-10 sm:pt-12">
           <motion.div className="flex flex-col items-center gap-3" {...fadeUp(reduced, 0)}>
             <div className="relative flex items-center justify-center">
@@ -162,9 +167,9 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* ZONE B: Ceremony details — true vertical centre, with generous padding
-             On desktop this sits BELOW the split title zone (top 18%–48%).
-             min-h ensures it never collapses on short viewports. ── */}
+        {/* ZONE B: Ceremony details — vertical centre
+            On desktop this sits below the stacked title zone (which ends at 50%).
+            flex-1 + justify-center spreads it naturally in the lower half. */}
         <div className="flex flex-1 flex-col items-center justify-center gap-5 px-5 py-10 text-center sm:gap-6 sm:py-12">
 
           {/* Mobile-only stacked title */}
@@ -175,7 +180,10 @@ export function Hero() {
             >
               {hero.titleTop}
             </span>
-            <span className="font-script text-parchment/60 leading-tight" style={{ fontSize: "clamp(1.2rem, 6vw, 1.6rem)" }}>
+            <span
+              className="font-script text-parchment/60 leading-tight"
+              style={{ fontSize: "clamp(1.2rem, 6vw, 1.6rem)" }}
+            >
               {hero.titleJoiner}
             </span>
             <span
@@ -184,18 +192,6 @@ export function Hero() {
             >
               {hero.titleBottom}
             </span>
-          </motion.div>
-
-          {/* Desktop "meets" bridge */}
-          <motion.div
-            className="hidden sm:flex items-center gap-4 w-48"
-            {...fadeUp(reduced, 0.45)}
-          >
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/45" />
-            <span className="font-script text-parchment/55 shrink-0" style={{ fontSize: "clamp(1.3rem, 3vw, 1.9rem)" }}>
-              {hero.titleJoiner}
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/45" />
           </motion.div>
 
           {/* Dholuo welcome */}
@@ -258,7 +254,7 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* ZONE C: Lake scene — anchored to the bottom */}
+        {/* ZONE C: Lake scene — bottom */}
         <motion.div className="w-full mt-auto" {...fadeIn(reduced, 1.0)}>
           <LakeScene reduced={reduced} />
         </motion.div>
@@ -270,7 +266,6 @@ export function Hero() {
 function LakeScene({ reduced }: { reduced: boolean | null }) {
   return (
     <div className="relative w-full overflow-hidden" style={{ height: "clamp(130px, 20vw, 190px)" }}>
-      {/* Sky */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1e0f04] via-[#0e1a2a] to-[#060e18]" />
 
       {/* Sun glow */}
@@ -278,7 +273,6 @@ function LakeScene({ reduced }: { reduced: boolean | null }) {
         style={{ top: "4%", width: "38%", height: "52%" }} />
       <div className="absolute left-1/2 -translate-x-1/2 rounded-full bg-gold-light/45 blur-lg"
         style={{ top: "13%", width: "9%", height: "26%" }} />
-      {/* Sun disc */}
       <div className="absolute left-1/2 -translate-x-1/2 rounded-full bg-gold/65"
         style={{ top: "19%", width: "2.5%", height: "11%", minWidth: "10px" }} />
 
