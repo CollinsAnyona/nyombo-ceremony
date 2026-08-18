@@ -105,11 +105,12 @@ export function Hero() {
 
           {/* HOMA-BAY */}
           <h1
-            className="font-display font-semibold uppercase text-gold-engraved leading-none"
+            className="font-display font-semibold uppercase leading-none"
             style={{
               fontSize: "clamp(2.8rem, 9vw, 7rem)",
               letterSpacing: "0.1em",
-              textShadow: "0 2px 0 rgba(21,12,7,0.9), 0 4px 20px rgba(21,12,7,0.6)",
+              color: "var(--color-gold-light)",
+              textShadow: "0 0 40px rgba(232,200,122,0.45), 0 2px 0 rgba(21,12,7,0.9)",
             }}
           >
             {hero.titleTop}
@@ -129,11 +130,12 @@ export function Hero() {
 
           {/* SIAYA */}
           <span
-            className="font-display font-semibold uppercase text-gold-engraved leading-none"
+            className="font-display font-semibold uppercase leading-none"
             style={{
               fontSize: "clamp(2.8rem, 9vw, 7rem)",
               letterSpacing: "0.1em",
-              textShadow: "0 2px 0 rgba(21,12,7,0.9), 0 4px 20px rgba(21,12,7,0.6)",
+              color: "var(--color-gold-light)",
+              textShadow: "0 0 40px rgba(232,200,122,0.45), 0 2px 0 rgba(21,12,7,0.9)",
             }}
           >
             {hero.titleBottom}
