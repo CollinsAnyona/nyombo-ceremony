@@ -2,50 +2,48 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useRevealed } from "@/lib/reveal-context";
 
-const EASE = [0.76, 0, 0.24, 1] as const;
+const SILK = [0.76, 0, 0.24, 1] as const;
 
-function WaxSeal({ onClick, opening }: { onClick: () => void; opening: boolean }) {
+/* ── Wax seal ── */
+function WaxSeal({ onClick, breaking }: { onClick: () => void; breaking: boolean }) {
   return (
     <motion.button
       onClick={onClick}
       aria-label="Open invitation"
-      className="group relative flex flex-col items-center gap-2 cursor-pointer focus:outline-none"
-      animate={opening ? { opacity: 0, scale: 1.5, y: -10 } : { opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeIn" }}
+      className="relative flex flex-col items-center gap-3 focus:outline-none cursor-pointer"
+      animate={breaking ? { scale: 1.35, opacity: 0 } : { scale: 1, opacity: 1 }}
+      transition={{ duration: 0.38, ease: "easeIn" }}
     >
-      {/* Pulse ring */}
-      {!opening && (
+      {/* Breathing pulse ring */}
+      {!breaking && (
         <motion.span
-          className="absolute inset-0 rounded-full border border-gold/40"
-          animate={{ scale: [1, 1.55], opacity: [0.5, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+          className="absolute rounded-full border border-gold/30"
+          style={{ inset: "-10px" }}
+          animate={{ scale: [1, 1.5], opacity: [0.4, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
         />
       )}
 
-      <svg viewBox="0 0 90 90" className="w-20 h-20 sm:w-24 sm:h-24 drop-shadow-[0_4px_22px_rgba(201,162,39,0.6)]" aria-hidden="true">
+      <svg viewBox="0 0 90 90" className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_24px_rgba(201,162,39,0.65)]" aria-hidden="true">
         <defs>
-          <radialGradient id="wax-g" cx="38%" cy="32%" r="62%">
-            <stop offset="0%" stopColor="#f5dfa0" />
-            <stop offset="40%" stopColor="#c9a227" />
-            <stop offset="100%" stopColor="#5c3a08" />
+          <radialGradient id="wax-g" cx="38%" cy="30%" r="65%">
+            <stop offset="0%" stopColor="#f7e8b0" />
+            <stop offset="38%" stopColor="#c9a227" />
+            <stop offset="100%" stopColor="#4e2e06" />
           </radialGradient>
         </defs>
-        {/* Star burst */}
-        <polygon
-          points="45,3 52,30 80,22 61,44 80,66 52,58 45,85 38,58 10,66 29,44 10,22 38,30"
-          fill="url(#wax-g)"
-        />
-        <circle cx="45" cy="44" r="20" fill="url(#wax-g)" />
-        {/* N monogram */}
-        <text x="45" y="51" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontWeight="bold" fill="#150c07" opacity="0.9">N</text>
+        <polygon points="45,2 52,29 80,20 61,43 80,66 52,57 45,84 38,57 10,66 29,43 10,20 38,29" fill="url(#wax-g)" />
+        <circle cx="45" cy="43" r="19" fill="url(#wax-g)" />
+        <text x="45" y="50" textAnchor="middle" fontFamily="Georgia,serif" fontSize="19" fontWeight="bold" fill="#150c07" opacity="0.88">N</text>
       </svg>
 
-      {/* "Open" label */}
+      {/* Open hint */}
       <motion.span
-        className="label-utility text-gold/80 tracking-[0.25em] text-xs"
-        animate={{ opacity: opening ? 0 : 1 }}
-        transition={{ duration: 0.2 }}
+        className="label-utility text-gold/65 tracking-[0.3em]"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
       >
         Open
       </motion.span>
@@ -53,144 +51,105 @@ function WaxSeal({ onClick, opening }: { onClick: () => void; opening: boolean }
   );
 }
 
-/* Diagonal fold lines */
-function FoldLines({ flip }: { flip?: boolean }) {
+/* ── Envelope SVG panels ── */
+function EnvelopeBody() {
   return (
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
-      <line x1="0" y1={flip ? "100" : "0"} x2="50" y2="50" stroke="#c9a227" strokeWidth="0.4" strokeOpacity="0.15" />
-      <line x1="100" y1={flip ? "100" : "0"} x2="50" y2="50" stroke="#c9a227" strokeWidth="0.4" strokeOpacity="0.15" />
+    <svg viewBox="0 0 160 100" className="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+      {/* Left panel */}
+      <polygon points="0,0 0,100 80,50" fill="#1c1108" />
+      {/* Right panel */}
+      <polygon points="160,0 160,100 80,50" fill="#1c1108" />
+      {/* Bottom panel */}
+      <polygon points="0,100 160,100 80,50" fill="#17100a" />
+      {/* Fold lines */}
+      <line x1="0" y1="0" x2="80" y2="50" stroke="#c9a227" strokeWidth="0.35" strokeOpacity="0.18" />
+      <line x1="160" y1="0" x2="80" y2="50" stroke="#c9a227" strokeWidth="0.35" strokeOpacity="0.18" />
+      <line x1="0" y1="100" x2="80" y2="50" stroke="#c9a227" strokeWidth="0.35" strokeOpacity="0.18" />
+      <line x1="160" y1="100" x2="80" y2="50" stroke="#c9a227" strokeWidth="0.35" strokeOpacity="0.18" />
     </svg>
   );
 }
 
+type Phase = "sealed" | "breaking" | "opening" | "gone";
+
 export function EnvelopeReveal() {
   const reduced = useReducedMotion();
-  const [phase, setPhase] = useState<"sealed" | "opening" | "gone">("sealed");
+  const { reveal } = useRevealed();
+  const [phase, setPhase] = useState<Phase>("sealed");
 
   useEffect(() => {
-    if (reduced) setPhase("gone");
-  }, [reduced]);
+    if (reduced) { reveal(); setPhase("gone"); }
+  }, [reduced, reveal]);
 
   if (phase === "gone") return null;
 
-  const opening = phase === "opening";
+  const breaking = phase === "breaking" || phase === "opening";
+  const opening  = phase === "opening";
+
+  function handleOpen() {
+    if (phase !== "sealed") return;
+    setPhase("breaking");
+    // After seal crack, start flap
+    setTimeout(() => setPhase("opening"), 420);
+  }
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-ink"
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: "#150c07" }}
+      /* Whole screen dissolves into the ink background — seamless */
       animate={opening ? { opacity: 0 } : { opacity: 1 }}
-      transition={opening ? { duration: 0.55, delay: 1.0, ease: "easeIn" } : undefined}
-      onAnimationComplete={() => { if (opening) setPhase("gone"); }}
+      transition={opening ? { duration: 0.9, delay: 0.85, ease: "easeInOut" } : undefined}
+      onAnimationComplete={() => { if (opening) { reveal(); setPhase("gone"); } }}
     >
-      {/* ── Envelope body ── */}
+      {/* Envelope card */}
       <motion.div
-        className="relative mx-4 w-full max-w-lg"
-        style={{ aspectRatio: "1.618 / 1" }}
-        animate={opening ? { scale: 1.04 } : { scale: 1 }}
-        transition={{ duration: 0.5, ease: EASE }}
+        className="relative mx-6 w-full max-w-md shadow-[0_16px_80px_rgba(0,0,0,0.85)]"
+        style={{ aspectRatio: "1.6 / 1" }}
+        animate={opening ? { scale: 1.06, y: -12 } : { scale: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: SILK }}
       >
-        {/* Envelope back / body */}
-        <div className="absolute inset-0 rounded-sm bg-[#1e1108] shadow-[0_8px_60px_rgba(0,0,0,0.8)] border border-gold/15" />
+        {/* Envelope body panels */}
+        <EnvelopeBody />
 
-        {/* Bottom flap triangle */}
-        <div className="absolute inset-0 overflow-hidden rounded-sm">
-          <svg viewBox="0 0 100 62" preserveAspectRatio="none" className="absolute inset-0 w-full h-full" aria-hidden="true">
-            {/* Bottom V */}
-            <polygon points="0,62 50,34 100,62" fill="#17100a" />
-            {/* Left triangle */}
-            <polygon points="0,0 0,62 50,34" fill="#1a1209" />
-            {/* Right triangle */}
-            <polygon points="100,0 100,62 50,34" fill="#1a1209" />
-            {/* Fold line borders */}
-            <line x1="0" y1="0" x2="50" y2="34" stroke="#c9a227" strokeWidth="0.3" strokeOpacity="0.2" />
-            <line x1="100" y1="0" x2="50" y2="34" stroke="#c9a227" strokeWidth="0.3" strokeOpacity="0.2" />
-            <line x1="0" y1="62" x2="50" y2="34" stroke="#c9a227" strokeWidth="0.3" strokeOpacity="0.2" />
-            <line x1="100" y1="62" x2="50" y2="34" stroke="#c9a227" strokeWidth="0.3" strokeOpacity="0.2" />
-          </svg>
-        </div>
+        {/* Gold border */}
+        <div className="absolute inset-0 border border-gold/12 pointer-events-none" />
 
-        {/* ── Top flap — folds back on open ── */}
+        {/* ── Top flap ── */}
         <motion.div
-          className="absolute inset-x-0 top-0 overflow-hidden rounded-t-sm"
-          style={{
-            height: "50%",
-            transformOrigin: "top center",
-            transformStyle: "preserve-3d",
-          }}
-          animate={opening ? { rotateX: -155 } : { rotateX: 0 }}
-          transition={{ duration: 0.85, ease: EASE, delay: 0.05 }}
+          className="absolute inset-x-0 top-0 overflow-visible"
+          style={{ height: "52%", transformOrigin: "top center", transformStyle: "preserve-3d" }}
+          animate={opening ? { rotateX: -162 } : { rotateX: 0 }}
+          transition={{ duration: 0.82, ease: SILK, delay: 0.04 }}
         >
-          <div className="absolute inset-0 bg-[#1e1108]">
-            <svg viewBox="0 0 100 62" preserveAspectRatio="none" className="absolute inset-0 w-full h-full" aria-hidden="true">
-              {/* Top flap triangle pointing down */}
-              <polygon points="0,0 100,0 50,100" fill="#241610" />
-              <line x1="0" y1="0" x2="50" y2="100" stroke="#c9a227" strokeWidth="0.4" strokeOpacity="0.18" />
-              <line x1="100" y1="0" x2="50" y2="100" stroke="#c9a227" strokeWidth="0.4" strokeOpacity="0.18" />
-            </svg>
-            {/* Gold border at flap bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-          </div>
+          <svg viewBox="0 0 160 52" className="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+            <polygon points="0,0 160,0 80,100" fill="#241812" />
+            <line x1="0" y1="0" x2="80" y2="100" stroke="#c9a227" strokeWidth="0.4" strokeOpacity="0.2" />
+            <line x1="160" y1="0" x2="80" y2="100" stroke="#c9a227" strokeWidth="0.4" strokeOpacity="0.2" />
+          </svg>
+          {/* Flap bottom edge gold line */}
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent" />
         </motion.div>
 
-        {/* ── Letter face content ── */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-8 pb-6 pt-4 text-center">
-
-          {/* Top decorative rule */}
-          <div className="flex w-full items-center gap-3 mb-4">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/35" />
-            <svg viewBox="0 0 10 10" className="w-2 h-2 shrink-0" aria-hidden="true">
-              <path d="M5 0 L10 5 L5 10 L0 5 Z" fill="var(--color-gold)" opacity="0.6" />
-            </svg>
-            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/35" />
-          </div>
-
-          {/* "Together with their families" */}
-          <p className="label-utility text-gold/55 tracking-[0.2em] text-[0.6rem] sm:text-[0.7rem] mb-3">
-            Together with their families
-          </p>
-
-          {/* Main invitation text */}
+        {/* ── Invitation text — just two lines, breathing room ── */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pointer-events-none select-none">
           <p
-            className="font-body text-parchment/80 leading-relaxed"
-            style={{ fontSize: "clamp(0.7rem, 2vw, 0.95rem)" }}
+            className="font-body italic text-parchment/50 tracking-wide"
+            style={{ fontSize: "clamp(0.6rem, 1.6vw, 0.8rem)" }}
           >
-            The families of
+            The families of Samantha &amp; Michael
           </p>
           <p
-            className="font-script text-gold-light mt-1"
-            style={{ fontSize: "clamp(1.4rem, 4.5vw, 2.2rem)", lineHeight: 1.2 }}
+            className="font-script text-gold-light"
+            style={{ fontSize: "clamp(1.1rem, 3.5vw, 1.7rem)", lineHeight: 1.3 }}
           >
-            Samantha &amp; Michael
+            cordially invite you
           </p>
-          <p
-            className="font-body text-parchment/70 mt-2 leading-relaxed max-w-xs"
-            style={{ fontSize: "clamp(0.65rem, 1.8vw, 0.88rem)" }}
-          >
-            cordially invite you to witness and celebrate<br />
-            their Nyombo ceremony
-          </p>
-
-          {/* Date line */}
-          <p
-            className="mt-3 label-utility text-gold/60 tracking-[0.15em]"
-            style={{ fontSize: "clamp(0.55rem, 1.5vw, 0.72rem)" }}
-          >
-            Monday · 21st December 2026 · Villa del Sol, Kisumu
-          </p>
-
-          {/* Bottom rule */}
-          <div className="flex w-full items-center gap-3 mt-4">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/35" />
-            <svg viewBox="0 0 10 10" className="w-2 h-2 shrink-0" aria-hidden="true">
-              <path d="M5 0 L10 5 L5 10 L0 5 Z" fill="var(--color-gold)" opacity="0.6" />
-            </svg>
-            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/35" />
-          </div>
         </div>
 
-        {/* ── Wax seal centred on the flap join ── */}
+        {/* ── Wax seal on the flap join ── */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-          <WaxSeal onClick={() => setPhase("opening")} opening={opening} />
+          <WaxSeal onClick={handleOpen} breaking={breaking} />
         </div>
       </motion.div>
     </motion.div>

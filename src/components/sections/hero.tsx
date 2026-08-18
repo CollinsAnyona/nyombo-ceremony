@@ -12,23 +12,24 @@ import { ButtonLink } from "@/components/ui/button";
 import { ceremonyContent } from "@/content/ceremony";
 import { siteConfig } from "@/lib/site-config";
 import { directionsUrl } from "@/lib/maps";
+import { useRevealed } from "@/lib/reveal-context";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-function up(reduced: boolean | null, delay: number) {
+function up(revealed: boolean, reduced: boolean | null, delay: number) {
   if (reduced) return { initial: { opacity: 1 }, animate: { opacity: 1 } };
   return {
     initial: { opacity: 0, y: 22 },
-    animate: { opacity: 1, y: 0 },
+    animate: revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 },
     transition: { duration: 0.85, delay, ease: EASE },
   };
 }
 
-function appear(reduced: boolean | null, delay: number) {
+function appear(revealed: boolean, reduced: boolean | null, delay: number) {
   if (reduced) return { initial: { opacity: 1 }, animate: { opacity: 1 } };
   return {
     initial: { opacity: 0 },
-    animate: { opacity: 1 },
+    animate: revealed ? { opacity: 1 } : { opacity: 0 },
     transition: { duration: 1.1, delay, ease: EASE },
   };
 }
@@ -36,6 +37,7 @@ function appear(reduced: boolean | null, delay: number) {
 export function Hero() {
   const { hero } = ceremonyContent;
   const reduced = useReducedMotion();
+  const { revealed } = useRevealed();
   const ref = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -90,7 +92,7 @@ export function Hero() {
       <div className="relative z-20 flex min-h-svh flex-col items-center text-center">
 
         {/* 1. Crown */}
-        <motion.div className="mt-14 flex flex-col items-center gap-3 sm:mt-16" {...up(reduced, 0)}>
+        <motion.div className="mt-14 flex flex-col items-center gap-3 sm:mt-16" {...up(revealed, reduced, 0)}>
           <div className="relative">
             <div className="absolute inset-0 scale-[2] rounded-full bg-[radial-gradient(closest-side,rgba(201,162,39,0.18),transparent)]" />
             <Crown className="relative w-14 drop-shadow-[0_0_18px_rgba(201,162,39,0.55)] sm:w-16" />
@@ -101,16 +103,15 @@ export function Hero() {
         </motion.div>
 
         {/* 2. Title block: HOMA-BAY / meets / SIAYA */}
-        <motion.div className="mt-10 flex flex-col items-center gap-3 sm:mt-12 sm:gap-4" {...appear(reduced, 0.3)}>
+        <motion.div className="mt-10 flex flex-col items-center gap-3 sm:mt-12 sm:gap-4" {...appear(revealed, reduced, 0.3)}>
 
           {/* HOMA-BAY */}
           <h1
-            className="font-display font-semibold uppercase leading-none"
+            className="font-display font-semibold uppercase leading-none text-gold-engraved"
             style={{
               fontSize: "clamp(2.8rem, 9vw, 7rem)",
               letterSpacing: "0.1em",
-              color: "var(--color-gold-light)",
-              textShadow: "0 0 40px rgba(232,200,122,0.45), 0 2px 0 rgba(21,12,7,0.9)",
+              filter: "drop-shadow(0 0 28px rgba(232,200,122,0.4))",
             }}
           >
             {hero.titleTop}
@@ -130,12 +131,11 @@ export function Hero() {
 
           {/* SIAYA */}
           <span
-            className="font-display font-semibold uppercase leading-none"
+            className="font-display font-semibold uppercase leading-none text-gold-engraved"
             style={{
               fontSize: "clamp(2.8rem, 9vw, 7rem)",
               letterSpacing: "0.1em",
-              color: "var(--color-gold-light)",
-              textShadow: "0 0 40px rgba(232,200,122,0.45), 0 2px 0 rgba(21,12,7,0.9)",
+              filter: "drop-shadow(0 0 28px rgba(232,200,122,0.4))",
             }}
           >
             {hero.titleBottom}
@@ -146,7 +146,7 @@ export function Hero() {
         <motion.p
           className="mt-8 font-script text-gold-light leading-none sm:mt-10"
           style={{ fontSize: "clamp(2rem, 6vw, 3.6rem)" }}
-          {...up(reduced, 0.55)}
+          {...up(revealed, reduced, 0.55)}
         >
           {hero.coupleNames}
         </motion.p>
@@ -155,7 +155,7 @@ export function Hero() {
         <motion.p
           className="mt-3 font-script text-amber-sunset/70"
           style={{ fontSize: "clamp(1.1rem, 3vw, 1.6rem)" }}
-          {...up(reduced, 0.65)}
+          {...up(revealed, reduced, 0.65)}
         >
           {siteConfig.welcome.dholuoGreeting}
         </motion.p>
@@ -163,14 +163,14 @@ export function Hero() {
         {/* 5. Scripture */}
         <motion.p
           className="mt-6 max-w-xs text-body italic text-parchment/45 sm:max-w-sm sm:mt-7"
-          {...up(reduced, 0.72)}
+          {...up(revealed, reduced, 0.72)}
         >
           &ldquo;{siteConfig.scripture.english}&rdquo;
           <span className="not-italic text-parchment/25"> — {siteConfig.scripture.reference}</span>
         </motion.p>
 
         {/* 6. Gold lozenge divider */}
-        <motion.div className="mt-7 flex items-center gap-3 w-44 sm:mt-8" {...appear(reduced, 0.78)}>
+        <motion.div className="mt-7 flex items-center gap-3 w-44 sm:mt-8" {...appear(revealed, reduced, 0.78)}>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/45" />
           <svg viewBox="0 0 10 10" className="w-2.5 h-2.5 shrink-0" aria-hidden="true">
             <path d="M5 0 L10 5 L5 10 L0 5 Z" fill="var(--color-gold)" opacity="0.7" />
@@ -181,7 +181,7 @@ export function Hero() {
         {/* 7. Date · Time · Venue */}
         <motion.div
           className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-body text-parchment/75 sm:mt-6"
-          {...up(reduced, 0.84)}
+          {...up(revealed, reduced, 0.84)}
         >
           <span>{hero.triad.date}</span>
           <span aria-hidden="true" className="text-gold/55">&middot;</span>
@@ -193,7 +193,7 @@ export function Hero() {
         {/* 8. CTAs */}
         <motion.div
           className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row"
-          {...up(reduced, 0.9)}
+          {...up(revealed, reduced, 0.9)}
         >
           <ButtonLink href="#rsvp">{hero.actions.rsvp}</ButtonLink>
           <ButtonLink href={directionsUrl()} target="_blank" rel="noopener noreferrer" variant="outline">
@@ -202,7 +202,7 @@ export function Hero() {
         </motion.div>
 
         {/* 9. Lake scene — pushed to the bottom */}
-        <motion.div className="mt-auto w-full" {...appear(reduced, 1.0)}>
+        <motion.div className="mt-auto w-full" {...appear(revealed, reduced, 1.0)}>
           <LakeScene reduced={reduced} />
         </motion.div>
 
