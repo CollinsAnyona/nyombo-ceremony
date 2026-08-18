@@ -1,15 +1,5 @@
 @import "tailwindcss";
 
-/*
-  Homa-Bay Meets Siaya — design tokens.
-
-  Palette per Hemi Tech build brief Section 5 ("starting values measured
-  from the artwork" — no raster source was supplied, so these are used
-  as-is; refine against the real invitation if it's supplied later).
-
-  gold-deep is decorative only (gradient bottom-stop, engraved shadow) —
-  never assign it as a text color, it fails contrast at any size.
-*/
 :root {
   --color-ink: #150c07;
   --color-ink-raised: #241610;
@@ -20,6 +10,8 @@
   --color-parchment: #f3ead8;
   --color-ivory-cowrie: #ede3d1;
   --color-amber-sunset: #d98a2b;
+  --color-lake-deep: #0a1520;
+  --color-lake-mid: #0d2035;
 
   --color-success: #4a8f5c;
   --color-error: #d1573f;
@@ -41,6 +33,8 @@
   --color-parchment: var(--color-parchment);
   --color-ivory-cowrie: var(--color-ivory-cowrie);
   --color-amber-sunset: var(--color-amber-sunset);
+  --color-lake-deep: var(--color-lake-deep);
+  --color-lake-mid: var(--color-lake-mid);
 
   --color-success: var(--color-success);
   --color-error: var(--color-error);
@@ -50,11 +44,6 @@
   --font-body: var(--font-eb-garamond);
   --font-utility: var(--font-cormorant-sc);
 
-  /*
-    Type scale — deliberate tracking per step. Wide tracking on the display
-    face is load-bearing: tight tracking on an engraved Roman capital is the
-    fastest way to make this read cheap (brief Section 5).
-  */
   --text-display-xl: 3rem;
   --text-display-xl--line-height: 1.15;
   --text-display-xl--letter-spacing: 0.04em;
@@ -91,11 +80,9 @@
   --text-label--line-height: 1.4;
   --text-label--letter-spacing: 0.18em;
 
-  /* Content-width rhythm. */
   --container-content: 68rem;
   --container-prose: 38rem;
 
-  /* Motion tokens shared across the site. */
   --ease-ceremonial: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 200ms;
   --duration-base: 500ms;
@@ -103,13 +90,9 @@
 }
 
 @layer base {
-  * {
-    border-color: var(--color-gold-deep);
-  }
+  * { border-color: var(--color-gold-deep); }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--background);
@@ -130,7 +113,6 @@
 }
 
 @layer utilities {
-  /* Letterspaced small-caps label treatment (DATE / TIME / VENUE). */
   .label-utility {
     font-family: var(--font-utility);
     font-variant-caps: small-caps;
@@ -141,7 +123,6 @@
     color: var(--color-gold-light);
   }
 
-  /* Gold-as-material: two-stop vertical gradient text, display sizes only. */
   .text-gold-engraved {
     background-image: linear-gradient(
       180deg,
@@ -153,11 +134,58 @@
     -webkit-background-clip: text;
     color: transparent;
   }
+
+  /* Drop cap for the Nyombo Explained section */
+  .prose-drop-cap p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 4.5em;
+    line-height: 0.75;
+    float: left;
+    margin-right: 0.1em;
+    margin-top: 0.08em;
+    background-image: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 55%, var(--color-gold-deep) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Torn paper edge — bottom of a section bleeds into the next */
+  .torn-edge-bottom {
+    position: relative;
+  }
+  .torn-edge-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: var(--color-ink);
+    clip-path: polygon(
+      0% 100%, 3% 20%, 7% 80%, 11% 10%, 15% 70%, 19% 30%,
+      23% 90%, 27% 15%, 31% 75%, 35% 40%, 39% 85%, 43% 20%,
+      47% 65%, 51% 10%, 55% 80%, 59% 35%, 63% 90%, 67% 25%,
+      71% 70%, 75% 15%, 79% 60%, 83% 30%, 87% 85%, 91% 20%,
+      95% 75%, 100% 40%, 100% 100%
+    );
+  }
+
+  /* Noise texture overlay — gives sections a tactile, printed feel */
+  .texture-noise {
+    position: relative;
+  }
+  .texture-noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
 }
 
 @layer components {
-  /* Gold-sweep hover: a specular highlight sweeps left-to-right, pure CSS
-     (no JS) since it runs on every button across the site. */
   .btn-gold-sweep {
     position: relative;
     overflow: hidden;
