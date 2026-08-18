@@ -49,7 +49,7 @@ export function Faq() {
   const { faq } = ceremonyContent;
 
   return (
-    <section id="faq" className="bg-ink py-16 sm:py-24">
+    <section id="faq" className="relative overflow-hidden bg-ink py-16 sm:py-24 texture-noise bleed-to-ink-raised">
       <Container size="prose" className="flex flex-col items-center gap-10">
         <Reveal>
           <SectionHeading eyebrow={faq.eyebrow} title={faq.heading} />

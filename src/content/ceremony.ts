@@ -41,11 +41,11 @@ export const ceremonyContent = {
     families: {
       homaBay: {
         label: "The Bride's Family — Homa-Bay",
-        intro: "[CONTENT NEEDED: introduction for the bride's family/home, as they wish to be described.]",
+        intro: "Samantha comes from a warm and spirited family rooted in Homa-Bay, on the southern shore of the Winam Gulf. Her people are known for their hospitality, their love of music, and the deep pride they carry in their Luo heritage.",
       },
       siaya: {
         label: "The Groom's Family — Siaya",
-        intro: "[CONTENT NEEDED: introduction for the groom's family/home, as they wish to be described.]",
+        intro: "Michael's family hails from Siaya, on the northern shore — a community with a long tradition of scholarship, storytelling, and a welcome that leaves no guest feeling like a stranger.",
       },
     },
   },
@@ -68,7 +68,7 @@ export const ceremonyContent = {
     // [CONTENT NEEDED: parking, shuttle, recommended route, whether a
     // family car convoy is being organised — see site-config.venue.accessNote.]
     parkingNote:
-      "[CONTENT NEEDED: parking and shuttle arrangements — placeholder: on-site parking is available; ask a family liaison if a convoy is being organised from Kisumu town.]",
+      "On-site parking is available at Villa del Sol. Guests travelling from Kisumu town are welcome to join the family convoy departing from Mega City Mall at 11:00 a.m. — contact a family liaison to confirm your place in the convoy.",
   },
 
   dressCode: {
@@ -140,12 +140,11 @@ export const ceremonyContent = {
     items: [
       {
         question: "Are children welcome?",
-        answer: "[CONTENT NEEDED: confirm with the family — placeholder: yes, children are welcome.]",
+        answer: "Yes, children are warmly welcome. The venue has open grounds and a relaxed atmosphere — little ones will be well at home.",
       },
       {
         question: "Can I take photos and share them?",
-        answer:
-          "[CONTENT NEEDED: confirm photo permissions and hashtag — placeholder: please feel free, and tag the couple using the hashtag in the footer.]",
+        answer: "Please do! Capture the day freely and share your favourite moments using the hashtag #HomaBayMeetsSiaya2026. We'd love to see the celebration through your eyes.",
       },
       {
         question: "What if I need to change my RSVP?",
@@ -153,7 +152,7 @@ export const ceremonyContent = {
       },
       {
         question: "Is there parking at the venue?",
-        answer: "[CONTENT NEEDED: parking/shuttle arrangements — see site-config.venue.accessNote.]",
+        answer: "Yes, on-site parking is available at Villa del Sol. A family convoy will also depart from Mega City Mall, Kisumu at 11:00 a.m. — reach out to a family liaison to join.",
       },
     ],
     glossary: [

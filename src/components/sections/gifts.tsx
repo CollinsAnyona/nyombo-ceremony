@@ -9,7 +9,7 @@ export function Gifts() {
   const { gifts } = ceremonyContent;
 
   return (
-    <section className="bg-ink py-16 sm:py-24">
+    <section className="relative overflow-hidden bg-ink py-16 sm:py-24 texture-noise bleed-to-ink">
       <Container size="prose" className="flex flex-col items-center gap-6 text-center">
         <Reveal>
           <SectionHeading eyebrow={gifts.eyebrow} title={gifts.heading} />

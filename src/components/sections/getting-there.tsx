@@ -11,7 +11,7 @@ export function GettingThere() {
   const { gettingThere } = ceremonyContent;
 
   return (
-    <section id="getting-there" className="relative overflow-hidden bg-green-royal py-16 sm:py-24">
+    <section id="getting-there" className="relative overflow-hidden bg-green-royal py-16 sm:py-24 texture-noise bleed-to-ink">
       <FloralCorner className="pointer-events-none absolute -right-8 -top-8 w-24 opacity-90 sm:w-28" />
 
       <Container className="relative flex flex-col items-center gap-8">
