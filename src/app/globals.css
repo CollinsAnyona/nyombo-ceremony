@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/*
+  Homa-Bay Meets Siaya — design tokens.
+
+  Palette per Hemi Tech build brief Section 5 ("starting values measured
+  from the artwork" — no raster source was supplied, so these are used
+  as-is; refine against the real invitation if it's supplied later).
+
+  gold-deep is decorative only (gradient bottom-stop, engraved shadow) —
+  never assign it as a text color, it fails contrast at any size.
+*/
+:root {
+  --color-ink: #150c07;
+  --color-ink-raised: #241610;
+  --color-green-royal: #14301c;
+  --color-gold: #c9a227;
+  --color-gold-light: #e8c87a;
+  --color-gold-deep: #8a6318;
+  --color-parchment: #f3ead8;
+  --color-ivory-cowrie: #ede3d1;
+  --color-amber-sunset: #d98a2b;
+
+  --color-success: #4a8f5c;
+  --color-error: #d1573f;
+
+  --background: var(--color-ink);
+  --foreground: var(--color-parchment);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ink: var(--color-ink);
+  --color-ink-raised: var(--color-ink-raised);
+  --color-green-royal: var(--color-green-royal);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-gold-deep: var(--color-gold-deep);
+  --color-parchment: var(--color-parchment);
+  --color-ivory-cowrie: var(--color-ivory-cowrie);
+  --color-amber-sunset: var(--color-amber-sunset);
+
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+
+  --font-display: var(--font-cinzel);
+  --font-script: var(--font-great-vibes);
+  --font-body: var(--font-eb-garamond);
+  --font-utility: var(--font-cormorant-sc);
+
+  /*
+    Type scale — deliberate tracking per step. Wide tracking on the display
+    face is load-bearing: tight tracking on an engraved Roman capital is the
+    fastest way to make this read cheap (brief Section 5).
+  */
+  --text-display-xl: 3rem;
+  --text-display-xl--line-height: 1.15;
+  --text-display-xl--letter-spacing: 0.04em;
+
+  --text-display-lg: 2.25rem;
+  --text-display-lg--line-height: 1.2;
+  --text-display-lg--letter-spacing: 0.045em;
+
+  --text-display-md: 1.75rem;
+  --text-display-md--line-height: 1.25;
+  --text-display-md--letter-spacing: 0.05em;
+
+  --text-script-lg: 3.5rem;
+  --text-script-lg--line-height: 1.1;
+  --text-script-lg--letter-spacing: 0em;
+
+  --text-script-md: 2rem;
+  --text-script-md--line-height: 1.2;
+  --text-script-md--letter-spacing: 0em;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.65;
+  --text-body-lg--letter-spacing: 0em;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-body--letter-spacing: 0em;
+
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.5;
+  --text-caption--letter-spacing: 0.01em;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.18em;
+
+  /* Content-width rhythm. */
+  --container-content: 68rem;
+  --container-prose: 38rem;
+
+  /* Motion tokens shared across the site. */
+  --ease-ceremonial: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 200ms;
+  --duration-base: 500ms;
+  --duration-slow: 900ms;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-gold-deep);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Letterspaced small-caps label treatment (DATE / TIME / VENUE). */
+  .label-utility {
+    font-family: var(--font-utility);
+    font-variant-caps: small-caps;
+    text-transform: uppercase;
+    font-size: var(--text-label);
+    line-height: var(--text-label--line-height);
+    letter-spacing: var(--text-label--letter-spacing);
+    color: var(--color-gold-light);
+  }
+
+  /* Gold-as-material: two-stop vertical gradient text, display sizes only. */
+  .text-gold-engraved {
+    background-image: linear-gradient(
+      180deg,
+      var(--color-gold-light) 0%,
+      var(--color-gold) 55%,
+      var(--color-gold-deep) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+@layer components {
+  /* Gold-sweep hover: a specular highlight sweeps left-to-right, pure CSS
+     (no JS) since it runs on every button across the site. */
+  .btn-gold-sweep {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gold-sweep::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      110deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.35) 50%,
+      transparent 60%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    transition: background-position var(--duration-slow) var(--ease-ceremonial);
+    pointer-events: none;
+  }
+
+  .btn-gold-sweep:hover::after,
+  .btn-gold-sweep:focus-visible::after {
+    background-position: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
