@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const variantClasses = {
   solid:
-    "bg-gold text-ink hover:bg-gold-light active:bg-gold-deep disabled:bg-ivory-cowrie/40 disabled:text-ink/40",
+    "bg-gold hover:bg-gold-light active:bg-gold-deep disabled:bg-ivory-cowrie/40 disabled:text-ink/40 [color:#150c07]",
   outline:
     "border border-gold text-gold-light hover:bg-gold/10 active:bg-gold/20 disabled:border-ivory-cowrie/30 disabled:text-ivory-cowrie/30",
 } as const;
