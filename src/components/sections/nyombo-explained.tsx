@@ -8,7 +8,7 @@ export function NyomboExplained() {
   const { nyomboExplained } = ceremonyContent;
 
   return (
-    <section className="relative overflow-hidden bg-green-royal py-20 sm:py-28 texture-noise">
+    <section className="relative overflow-hidden bg-green-royal py-20 sm:py-28 texture-noise bleed-to-ink">
       {/* Corner florals */}
       <FloralCorner className="pointer-events-none absolute -right-4 -top-4 w-32 opacity-50 sm:w-40" />
       <FloralCorner className="pointer-events-none absolute -bottom-4 -left-4 w-28 rotate-180 opacity-40 sm:w-36" />

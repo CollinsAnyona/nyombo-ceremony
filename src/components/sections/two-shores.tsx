@@ -18,7 +18,7 @@ export function TwoShores() {
   const rightX = useTransform(scrollYProgress, [0.1, 0.6], ["8%", "0%"]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-ink py-20 sm:py-28 texture-noise">
+    <section ref={ref} className="relative overflow-hidden bg-ink py-20 sm:py-28 texture-noise bleed-to-green">
 
       {/* Ambient lake glow at centre */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-64 bg-[radial-gradient(ellipse_50%_100%_at_50%_50%,rgba(13,32,53,0.6),transparent)]" />

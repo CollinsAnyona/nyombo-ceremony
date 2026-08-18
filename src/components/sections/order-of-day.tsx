@@ -14,7 +14,7 @@ export function OrderOfDay() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-green-royal py-20 sm:py-28 texture-noise">
+    <section className="relative overflow-hidden bg-green-royal py-20 sm:py-28 texture-noise bleed-to-ink-raised">
       <FloralCorner className="pointer-events-none absolute -right-4 -top-4 w-32 opacity-50 sm:w-40" />
 
       <Container size="prose" className="relative flex flex-col items-center gap-12">

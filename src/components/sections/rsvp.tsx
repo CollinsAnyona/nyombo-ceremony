@@ -75,7 +75,7 @@ export function Rsvp() {
 
   if (confirmedName) {
     return (
-      <section id="rsvp" className="relative overflow-hidden bg-ink-raised py-16 sm:py-24">
+      <section id="rsvp" className="relative overflow-hidden bg-ink-raised py-16 sm:py-24 bleed-to-lake">
         <Container size="prose" className="flex flex-col items-center gap-4 text-center">
           <CowrieShell selected className="w-16" />
           <p className="font-script text-script-md text-gold-light">{rsvp.confirmation(confirmedName)}</p>
@@ -86,7 +86,7 @@ export function Rsvp() {
   }
 
   return (
-    <section id="rsvp" className="relative overflow-hidden bg-ink-raised py-16 sm:py-24">
+    <section id="rsvp" className="relative overflow-hidden bg-ink-raised py-16 sm:py-24 bleed-to-lake">
       <FloralCorner className="pointer-events-none absolute -left-8 -top-8 w-24 -scale-x-100 opacity-90 sm:w-28" />
 
       <Container size="prose" className="relative flex flex-col items-center gap-10">

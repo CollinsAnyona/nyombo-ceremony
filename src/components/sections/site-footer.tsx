@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Crown } from "@/components/motifs/crown";
 import { DhowSilhouette } from "@/components/motifs/dhow-silhouette";
@@ -30,6 +31,21 @@ export function SiteFooter() {
 
   return (
     <footer className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #060e18, #030810)" }}>
+
+      {/* Hero image — fades in at the top of the footer */}
+      <div className="relative w-full overflow-hidden" style={{ height: "clamp(220px, 40vw, 420px)" }}>
+        <Image
+          src="/images/For the end..jpeg"
+          alt="Samantha & Michael"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Fade top edge into the section above */}
+        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#060e18] to-transparent" />
+        {/* Fade bottom edge into the footer content */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#060e18] to-transparent" />
+      </div>
 
       {/* Stars */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">

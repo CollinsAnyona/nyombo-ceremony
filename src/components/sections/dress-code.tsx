@@ -15,7 +15,7 @@ export function DressCode() {
   const { dressCode } = ceremonyContent;
 
   return (
-    <section className="relative overflow-hidden bg-ink py-20 sm:py-28 texture-noise">
+    <section className="relative overflow-hidden bg-ink py-20 sm:py-28 texture-noise bleed-to-green">
       <FloralCorner className="pointer-events-none absolute -left-4 -top-4 w-32 -scale-x-100 opacity-50 sm:w-40" />
 
       <Container className="relative flex flex-col items-center gap-12">

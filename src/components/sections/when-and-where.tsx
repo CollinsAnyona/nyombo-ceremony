@@ -12,7 +12,7 @@ export function WhenAndWhere() {
   const { whenWhere } = ceremonyContent;
 
   return (
-    <section id="when-and-where" className="relative overflow-hidden bg-green-royal py-20 sm:py-28 texture-noise">
+    <section id="when-and-where" className="relative overflow-hidden bg-green-royal py-20 sm:py-28 texture-noise bleed-to-ink">
       {/* Bouquet — bottom right, spilling out */}
       <FloralBouquet className="pointer-events-none absolute -bottom-16 -right-12 w-56 opacity-50 sm:w-72" />
       <FloralBouquet className="pointer-events-none absolute -bottom-16 -left-12 w-56 -scale-x-100 opacity-40 sm:w-64" />
