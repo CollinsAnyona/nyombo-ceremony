@@ -32,19 +32,19 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #060e18, #030810)" }}>
 
-      {/* Hero image — fades in at the top of the footer */}
-      <div className="relative w-full overflow-hidden" style={{ height: "clamp(220px, 40vw, 420px)" }}>
-        <Image
-          src="/images/For the end..jpeg"
-          alt="Samantha & Michael"
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Fade top edge into the section above */}
-        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#060e18] to-transparent" />
-        {/* Fade bottom edge into the footer content */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#060e18] to-transparent" />
+      {/* Photo — natural size, centred, fully visible */}
+      <div className="flex justify-center px-6 pt-10 pb-2">
+        <div className="relative w-full max-w-sm overflow-hidden rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.6)] border border-gold/10">
+          <Image
+            src="/images/For the end..jpeg"
+            alt="Samantha & Michael"
+            width={480}
+            height={640}
+            className="w-full h-auto object-contain"
+          />
+          {/* Subtle gold vignette */}
+          <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/10 pointer-events-none" />
+        </div>
       </div>
 
       {/* Stars */}
