@@ -36,7 +36,7 @@ function WaxSeal({ onClick, breaking }: { onClick: () => void; breaking: boolean
       </motion.span>
 
       {/* Star seal — below "Open" */}
-      <svg viewBox="0 0 90 90" className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_24px_rgba(201,162,39,0.65)]" aria-hidden="true">
+      <svg viewBox="0 0 90 90" className="w-10 h-10 sm:w-12 sm:h-12 drop-shadow-[0_0_18px_rgba(201,162,39,0.65)]" aria-hidden="true">
         <defs>
           <radialGradient id="wax-g" cx="38%" cy="30%" r="65%">
             <stop offset="0%" stopColor="#f7e8b0" />
@@ -132,8 +132,8 @@ export function EnvelopeReveal() {
           <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent" />
         </motion.div>
 
-        {/* ── Invitation text — just two lines, breathing room ── */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pointer-events-none select-none">
+        {/* ── Invitation text — upper third of envelope ── */}
+        <div className="absolute inset-x-0 top-0 flex flex-col items-center justify-center gap-2 pointer-events-none select-none" style={{ height: "52%" }}>
           <p
             className="font-body italic text-parchment/80 tracking-wide"
             style={{ fontSize: "clamp(0.65rem, 1.8vw, 0.85rem)" }}
@@ -148,8 +148,8 @@ export function EnvelopeReveal() {
           </p>
         </div>
 
-        {/* ── Wax seal on the flap join ── */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+        {/* ── Wax seal anchored to bottom half, clear of text ── */}
+        <div className="absolute left-1/2 bottom-[12%] -translate-x-1/2 z-20">
           <WaxSeal onClick={handleOpen} breaking={breaking} />
         </div>
       </motion.div>
