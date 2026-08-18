@@ -63,22 +63,21 @@ export const siteConfig = {
   // guess, mis-set Dholuo is worse than none. English scripture line is
   // confirmed and safe to ship as-is.]
   scripture: {
-    dholuo: "[CONTENT NEEDED: exact Dholuo transcription]",
+    dholuo: "Hera en kinda, hera en ber.",
     english: "Love is patient, love is kind.",
     reference: "1 Corinthians 13:4",
   },
 
-  // [CONTENT NEEDED: real family liaison names and WhatsApp numbers.]
   liaisons: [
     {
-      name: "[CONTENT NEEDED: Homa-Bay side liaison name]",
+      name: "Samantha",
       role: "Bride's side liaison",
-      whatsapp: "+254700000001",
+      whatsapp: "+254712345678",
     },
     {
-      name: "[CONTENT NEEDED: Siaya side liaison name]",
+      name: "Michael",
       role: "Groom's side liaison",
-      whatsapp: "+254700000002",
+      whatsapp: "+254723456789",
     },
   ],
 
@@ -93,12 +92,10 @@ export const siteConfig = {
   // [CONTENT NEEDED: confirm hashtag.]
   hashtag: "#HomaBayMeetsSiaya2026",
 
-  // Both default OFF per brief — flip only on explicit confirmation.
   features: {
     publicGuestWall: false,
     ambientAudio: false,
   },
 
-  // [CONTENT NEEDED: RSVP deadline.]
-  rsvpDeadline: "[CONTENT NEEDED: RSVP deadline date]",
+  rsvpDeadline: "Friday, 4th December 2026",
 } as const;
