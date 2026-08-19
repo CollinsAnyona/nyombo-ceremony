@@ -40,7 +40,7 @@ export function TwoShores() {
         {/* The convergence — two cards moving toward each other */}
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-[1fr_auto_1fr] sm:gap-4 items-center">
 
-          {/* Homa-Bay card */}
+          {/* Bride's family card */}
           <motion.div
             style={reduced ? undefined : { x: leftX }}
             className="will-change-transform"
@@ -49,10 +49,10 @@ export function TwoShores() {
               <div className="relative rounded-2xl border border-gold-deep/30 bg-ink-raised p-6 sm:p-8 overflow-hidden">
                 {/* Top accent bar */}
                 <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                <p className="label-utility text-center sm:text-left">{twoShores.families.homaBay.label}</p>
+                <p className="label-utility text-center sm:text-left">{twoShores.families.bride.label}</p>
                 <div className="mt-3 h-px w-12 bg-gold/30 hidden sm:block" />
                 <p className="mt-3 text-body text-parchment/80 text-center sm:text-left leading-relaxed">
-                  {twoShores.families.homaBay.intro}
+                  {twoShores.families.bride.intro}
                 </p>
                 {/* Bottom accent */}
                 <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
@@ -77,7 +77,7 @@ export function TwoShores() {
             </div>
           </Reveal>
 
-          {/* Siaya card */}
+          {/* Groom's family card */}
           <motion.div
             style={reduced ? undefined : { x: rightX }}
             className="will-change-transform"
@@ -85,10 +85,10 @@ export function TwoShores() {
             <Reveal delay={0.3}>
               <div className="relative rounded-2xl border border-gold-deep/30 bg-ink-raised p-6 sm:p-8 overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                <p className="label-utility text-center sm:text-right">{twoShores.families.siaya.label}</p>
+                <p className="label-utility text-center sm:text-right">{twoShores.families.groom.label}</p>
                 <div className="mt-3 h-px w-12 bg-gold/30 ml-auto hidden sm:block" />
                 <p className="mt-3 text-body text-parchment/80 text-center sm:text-right leading-relaxed">
-                  {twoShores.families.siaya.intro}
+                  {twoShores.families.groom.intro}
                 </p>
                 <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
               </div>

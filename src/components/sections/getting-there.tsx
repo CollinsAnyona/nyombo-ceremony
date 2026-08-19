@@ -29,9 +29,21 @@ export function GettingThere() {
           />
         </Reveal>
 
-        <Reveal delay={0.25} className="max-w-(--container-prose) space-y-3 text-center text-body text-parchment/85">
+        <Reveal delay={0.25} className="max-w-(--container-prose) space-y-4 text-center text-body text-parchment/85">
           <p>{siteConfig.venue.accessNote}</p>
-          <p>{gettingThere.parkingNote}</p>
+          <p>{gettingThere.parkingIntro}</p>
+          <div>
+            <p>{gettingThere.convoy.intro}</p>
+            <ul className="mt-2 flex flex-col items-center gap-1">
+              {gettingThere.convoy.points.map((point) => (
+                <li key={point.location}>
+                  <strong className="text-parchment">{point.location}</strong> — {point.time}. Please confirm with{" "}
+                  {point.contact} if you&apos;re coming, and whether you&apos;ll be coming with your spouse (+1).
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="font-medium text-parchment">{gettingThere.convoy.note}</p>
         </Reveal>
 
         <Reveal delay={0.35} className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">

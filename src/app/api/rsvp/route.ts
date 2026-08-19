@@ -1,16 +1,7 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 import { rsvpSchema } from "@/lib/rsvp-schema";
-
-/**
- * [SWAP POINT — BRIEF.md Section 3 & 11]: appends to a local JSON-lines file,
- * which only works for local development. Vercel's serverless filesystem is
- * read-only outside /tmp and non-durable across deploys/instances — replace
- * this with the Supabase-or-Google-Sheet write Hemi Tech needs to pick
- * before this ships, plus the notification email (Resend).
- */
-const STORE_PATH = path.join(process.cwd(), "data", "rsvps.jsonl");
+import { appendRsvpRow } from "@/lib/google-sheets";
+import { sendRsvpNotification } from "@/lib/notify";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -31,8 +22,20 @@ export async function POST(request: Request) {
 
   const record = { ...parsed.data, submittedAt: new Date().toISOString() };
 
-  await fs.mkdir(path.dirname(STORE_PATH), { recursive: true });
-  await fs.appendFile(STORE_PATH, `${JSON.stringify(record)}\n`, "utf8");
+  try {
+    await appendRsvpRow(record);
+  } catch (error) {
+    console.error("Failed to write RSVP to Google Sheet:", error);
+    return NextResponse.json(
+      { error: "We couldn't save your RSVP right now — please try again shortly." },
+      { status: 502 }
+    );
+  }
+
+  // Notification email is best-effort — the RSVP is already durably saved above.
+  sendRsvpNotification(record).catch((error) => {
+    console.error("Failed to send RSVP notification email:", error);
+  });
 
   return NextResponse.json({ ok: true });
 }

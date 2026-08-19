@@ -107,8 +107,8 @@ export function SiteFooter() {
         {/* Divider */}
         <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-        {/* Hashtag */}
-        <p className="label-utility text-parchment/40 tracking-widest">{siteConfig.hashtag}</p>
+        {/* Hashtags */}
+        <p className="label-utility text-parchment/40 tracking-widest">{siteConfig.hashtags.join("   ")}</p>
 
       </Container>
     </footer>

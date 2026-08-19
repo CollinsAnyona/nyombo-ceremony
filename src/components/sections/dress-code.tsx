@@ -5,10 +5,14 @@ import { FloralCorner } from "@/components/motifs/floral-corner";
 import { ceremonyContent } from "@/content/ceremony";
 
 const SWATCHES = [
-  { label: "Ink",          bg: "#150c07", border: "#8a6318", accent: "#c9a227" },
-  { label: "Royal Green",  bg: "#14301c", border: "#4a8f5c", accent: "#4a8f5c" },
-  { label: "Gold",         bg: "#c9a227", border: "#e8c87a", accent: "#150c07" },
-  { label: "Amber Sunset", bg: "#d98a2b", border: "#e8c87a", accent: "#150c07" },
+  { label: "Terracotta",     bg: "#c1502e", border: "#e8a87a", accent: "#150c07" },
+  { label: "Rust",           bg: "#9a4a2c", border: "#e0956b", accent: "#150c07" },
+  { label: "Burgundy/Wine",  bg: "#5c1a2e", border: "#d98fa3", accent: "#f3ead8" },
+  { label: "Camel/Tan",      bg: "#c19a6b", border: "#ead9be", accent: "#150c07" },
+  { label: "Taupe",          bg: "#8c7b6b", border: "#d9cfc2", accent: "#150c07" },
+  { label: "Beige",          bg: "#d9c8ac", border: "#f3ead8", accent: "#150c07" },
+  { label: "Black",          bg: "#1c1c1c", border: "#c9a227", accent: "#c9a227" },
+  { label: "Deep Plum",      bg: "#3d1b3d", border: "#c79acb", accent: "#f3ead8" },
 ];
 
 export function DressCode() {

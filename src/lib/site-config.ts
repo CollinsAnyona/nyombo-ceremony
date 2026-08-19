@@ -89,8 +89,8 @@ export const siteConfig = {
     till: "",
   },
 
-  // [CONTENT NEEDED: confirm hashtag.]
-  hashtag: "#HomaBayMeetsSiaya2026",
+  // [CONTENT NEEDED: confirm "Ataka" is the family's intended spelling/wording.]
+  hashtags: ["#HomaBayMeetsSiaya", "#LoveTheAtakaWay"],
 
   features: {
     publicGuestWall: false,

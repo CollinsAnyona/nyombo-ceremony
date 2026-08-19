@@ -137,7 +137,7 @@
   }
 
   /* Drop cap for the Nyombo Explained section */
-  .prose-drop-cap p:first-of-type::first-letter {
+  .prose-drop-cap p::first-letter {
     font-family: var(--font-display);
     font-size: 4.5em;
     line-height: 0.75;
