@@ -137,15 +137,12 @@ export const ceremonyContent = {
     sideOptions: ["Siaya (bride's side)", "Homa-Bay (groom's side)", "Friend of the couple"],
     confirmation: (name: string) => `Karibu, ${name} — your cowrie is placed.`,
     editNote: "Need to change your answer? Submit again with the same WhatsApp number.",
-    // [CONTENT NEEDED: confirm RSVP deadline — see site-config.rsvpDeadline.]
   },
 
   gifts: {
     eyebrow: "Gifts & Blessings",
     heading: "Your presence is the gift",
-    // [CONTENT NEEDED: confirm M-Pesa details in writing before enabling —
-    // see site-config.gifts. Paragraph below is written to hold regardless
-    // of that decision.]
+    // Confirmed presence-only — see site-config.gifts (mpesaEnabled: false).
     paragraph:
       "Your presence and blessing mean more to us than any gift. For those who wish to honour the couple further, well-wishes and contributions are received gratefully — details are shared by the family liaisons below.",
   },

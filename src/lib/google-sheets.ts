@@ -13,8 +13,12 @@ function getClient() {
   }
   return new JWT({
     email,
-    // Vercel/`.env` store the key with literal `\n` sequences; restore real newlines.
-    key: key.replace(/\\n/g, "\n"),
+    // Vercel/`.env` store the key with literal `\n` sequences; restore real
+    // newlines. Also strip stray `\r` — copy/paste into Vercel's env var UI
+    // can turn escaped `\n`s into real CRLF line breaks, and a `\r` inside
+    // the base64 body makes Node's OpenSSL-3 PEM decoder throw
+    // ERR_OSSL_UNSUPPORTED ("DECODER routines::unsupported").
+    key: key.replace(/\\n/g, "\n").replace(/\r/g, ""),
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 }

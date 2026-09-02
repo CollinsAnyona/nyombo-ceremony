@@ -1,7 +1,6 @@
 import { siteConfig } from "@/lib/site-config";
 
-// [CONTENT NEEDED: confirm the ceremony's end time from the order of the
-// day — placeholder assumes a 5-hour event ending around 5pm EAT.]
+// Confirmed: event runs 5 hours, ending ~5pm EAT.
 const EVENT_DURATION_HOURS = 5;
 
 function toIcsUtc(date: Date) {

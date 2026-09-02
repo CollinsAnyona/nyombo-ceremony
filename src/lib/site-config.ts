@@ -9,9 +9,8 @@ export const siteConfig = {
   eventType: "Nyombo Ceremony",
   description:
     "Samantha & Michael's Nyombo ceremony — two families, two shores of Lake Victoria, one celebration. Monday 21 December 2026, Villa del Sol, Kisumu.",
-  // [CONTENT NEEDED: confirmed production domain — placeholder Vercel URL
-  // used so metadataBase stays a valid absolute URL until then.]
-  url: "https://homa-bay-meets-siaya.vercel.app",
+  // Live Vercel URL — swap for a custom domain if the couple gets one.
+  url: "https://nyombo-ceremony.vercel.app",
   locale: "en_US",
   // Default OFF per brief Section 9 — flip once the couple confirms the
   // page should be publicly discoverable rather than link-only.
@@ -42,8 +41,7 @@ export const siteConfig = {
       longitude: 34.6439129,
     },
     googlePlaceId: "ChIJKYXFVz2vKhgRTQQLo3abTfU",
-    // [CONTENT NEEDED: parking, shuttle, recommended route, whether a
-    // family car convoy is being organised.]
+    // Confirmed: no organised family convoy — guests self-drive using this note.
     accessNote:
       "Villa del Sol sits off the tarmac on a rough access road toward Paga Beach — plan to arrive in daylight and drive slowly on the final stretch.",
   },
@@ -58,10 +56,7 @@ export const siteConfig = {
     dholuoGreeting: "Karibuni sana!",
   },
 
-  // [CONTENT NEEDED: exact Dholuo transcription and spelling for the line
-  // above "Love is patient, love is kind." on the printed card — do not
-  // guess, mis-set Dholuo is worse than none. English scripture line is
-  // confirmed and safe to ship as-is.]
+  // Dholuo transcription confirmed.
   scripture: {
     dholuo: "Hera en kinda, hera en ber.",
     english: "Love is patient, love is kind.",
@@ -81,15 +76,13 @@ export const siteConfig = {
     },
   ],
 
-  // [CONTENT NEEDED: confirm before enabling — never hardcode a paybill,
-  // till, or phone number that hasn't been confirmed in writing.]
+  // Confirmed: presence-only, no M-Pesa number to publish.
   gifts: {
     mpesaEnabled: false,
     paybill: "",
     till: "",
   },
 
-  // [CONTENT NEEDED: confirm "Ataka" is the family's intended spelling/wording.]
   hashtags: ["#HomaBayMeetsSiaya", "#LoveTheAtakaWay"],
 
   features: {
