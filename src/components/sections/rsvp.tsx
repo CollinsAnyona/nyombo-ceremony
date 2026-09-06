@@ -12,7 +12,7 @@ import { ceremonyContent } from "@/content/ceremony";
 
 type Attending = "yes" | "no";
 
-const initialValues = { name: "", whatsapp: "", email: "", side: "", guestCount: "1", message: "", company: "" };
+const initialValues = { name: "", whatsapp: "", email: "", side: "", message: "", company: "" };
 
 export function Rsvp() {
   const { rsvp } = ceremonyContent;
@@ -53,7 +53,6 @@ export function Rsvp() {
           whatsapp: values.whatsapp.trim(),
           email: values.email.trim(),
           side: values.side,
-          guestCount: attending === "yes" ? Number(values.guestCount) || 1 : undefined,
           message: values.message.trim(),
           company: values.company,
         }),
@@ -193,20 +192,7 @@ export function Rsvp() {
                 <FieldError id="side-error" message={errors.side} />
               </div>
 
-              {attending === "yes" && (
-                <div>
-                  <FieldLabel htmlFor="guestCount">{rsvp.fields.guestCount}</FieldLabel>
-                  <Select id="guestCount" value={values.guestCount} onChange={(e) => setField("guestCount", e.target.value)}>
-                    {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-              )}
-
-              <div className={attending === "no" ? "sm:col-span-2" : ""}>
+              <div className="sm:col-span-2">
                 <FieldLabel htmlFor="message">{rsvp.fields.message}</FieldLabel>
                 <TextArea
                   id="message"

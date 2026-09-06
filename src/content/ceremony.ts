@@ -131,7 +131,6 @@ export const ceremonyContent = {
       whatsapp: "WhatsApp number",
       email: "Email (optional)",
       side: "Which side are you joining us from?",
-      guestCount: "Guests attending with you",
       message: "A short message for the couple",
     },
     sideOptions: ["Siaya (bride's side)", "Homa-Bay (groom's side)", "Friend of the couple"],

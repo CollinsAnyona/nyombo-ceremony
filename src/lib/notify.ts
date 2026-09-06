@@ -26,7 +26,6 @@ export async function sendRsvpNotification(record: RsvpInput & { submittedAt: st
       `Side: ${record.side}`,
       `WhatsApp: ${record.whatsapp}`,
       record.email ? `Email: ${record.email}` : null,
-      record.guestCount ? `Guest count: ${record.guestCount}` : null,
       record.message ? `Message: ${record.message}` : null,
       `Submitted: ${record.submittedAt}`,
     ]
