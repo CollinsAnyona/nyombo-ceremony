@@ -177,6 +177,6 @@ export const ceremonyContent = {
   },
 
   footer: {
-    closingLine: "Wuod dhi e pinyni! You are most welcome.",
+    closingLine: "Warwaki e pinyni! You are most welcome.",
   },
 } as const;

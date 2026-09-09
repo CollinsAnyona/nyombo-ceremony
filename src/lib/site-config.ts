@@ -51,7 +51,7 @@ export const siteConfig = {
   },
 
   welcome: {
-    dholuo: "Wuod dhi e pinyni!",
+    dholuo: "Warwaki e pinyni!",
     english: "You are most welcome!",
     dholuoGreeting: "Karibuni sana!",
   },
@@ -67,12 +67,12 @@ export const siteConfig = {
     {
       name: "Samantha",
       role: "Bride's side liaison",
-      whatsapp: "+254712345678",
+      whatsapp: "+254799189084",
     },
     {
       name: "Michael",
       role: "Groom's side liaison",
-      whatsapp: "+254723456789",
+      whatsapp: "+254115302513",
     },
   ],
 

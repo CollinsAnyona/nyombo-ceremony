@@ -60,7 +60,7 @@ If any stack choice fights a goal in this brief, say so explicitly instead of qu
 | Google Place ID | `ChIJKYXFVz2vKhgRTQQLo3abTfU` |
 | Venue phone | +254 796 533678 (venue, not the family — use only in a "getting there" context) |
 | Dress code | Traditional \| Elegant |
-| Welcome lines | *Karibuni sana!* / *Wuod dhi e pinyni!* — "You are most welcome!" |
+| Welcome lines | *Karibuni sana!* / *Warwaki e pinyni!* — "You are most welcome!" |
 | Scripture line | "Love is patient, love is kind." (1 Corinthians 13:4) — the Dholuo rendering above it in the printed card is **[CONFIRM: exact Dholuo transcription and spelling — do not guess, mis-set Dholuo is worse than none]** |
 
 Invitation body copy to carry over, tightened for screen: two families, two homes, and two traditions coming together in a celebration of love, culture, unity and heritage.
